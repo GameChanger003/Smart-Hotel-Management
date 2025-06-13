@@ -5,8 +5,15 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "hotel")
 public class Hotel {
+	@Override
+	public String toString() {
+		return "Hotel [HotelID=" + HotelID + ", name=" + name + ", location=" + location + ", managerID=" + managerID
+				+ ", amenities=" + amenities + ", rating=" + rating + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int HotelID;
 
 	@Column(nullable = false, length = 100)
@@ -18,7 +25,7 @@ public class Hotel {
 	@Column(nullable = false)
 	private int managerID;
 
-	@Column(length = 500)
+	@Column
 	private String amenities;
 
 	@Column(nullable = false)

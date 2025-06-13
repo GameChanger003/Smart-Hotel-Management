@@ -9,9 +9,8 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roomID;
 
-	@ManyToOne
-	@JoinColumn(name = "HotelID", nullable = false)
-	private Hotel hotel;
+	@Column
+	private int hotel;
 
 	@Column(nullable = false, length = 50)
 	private String type;
@@ -33,11 +32,11 @@ public class Room {
 		this.roomID = roomID;
 	}
 
-	public Hotel getHotel() {
+	public int getHotel() {
 		return hotel;
 	}
 
-	public void setHotel(Hotel hotel) {
+	public void setHotel(int hotel) {
 		this.hotel = hotel;
 	}
 

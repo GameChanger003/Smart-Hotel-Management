@@ -36,7 +36,7 @@ public class HotelController {
 	public Hotel addHotel(@RequestBody Hotel hotel) {
 		return hotelService.addHotel(hotel);
 	}
-
+	
 	@PutMapping("/update/{oldHotelID}")
 	public Hotel updateHotel(@PathVariable int oldHotelID,@RequestBody Hotel newHotel) {
 		return hotelService.updateHotel(oldHotelID, newHotel);
