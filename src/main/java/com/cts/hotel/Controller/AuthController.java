@@ -15,15 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.hotel.JWT.JwtUtil;
 import com.cts.hotel.Model.User;
 import com.cts.hotel.Service.UserService;
+<<<<<<< HEAD
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+=======
+>>>>>>> jatin
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
+=======
+
+@RestController
+@RequestMapping("/auth")
+>>>>>>> jatin
 public class AuthController {
     @Autowired
     private UserService userService;
