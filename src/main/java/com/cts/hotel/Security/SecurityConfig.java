@@ -29,7 +29,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/login", "/auth/register","/auth/test").permitAll()
                 .requestMatchers("/admin/**","/admin/rooms/**","/hotels/**").hasRole("ADMIN") 
-                .requestMatchers("/user/**").hasRole("GUEST")
+                .requestMatchers("/user/**","/booking/**","/paymnet/**").hasRole("GUEST")
                 .requestMatchers("/receptionist/**").hasRole("RECEPTIONIST")
                 .anyRequest().authenticated()
             )
