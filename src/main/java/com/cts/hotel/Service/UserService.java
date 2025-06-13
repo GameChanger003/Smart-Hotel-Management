@@ -1,19 +1,13 @@
 package com.cts.hotel.Service;
 
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> jatin
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import com.cts.hotel.Model.Role;
-=======
->>>>>>> jatin
 import com.cts.hotel.Model.User;
 import com.cts.hotel.Repo.UserRepository;
 
@@ -45,7 +39,6 @@ public class UserService {
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
-<<<<<<< HEAD
     
    public List<User> getAllUsers(){
 	   return userRepository.findAll();
@@ -54,6 +47,4 @@ public class UserService {
    public List<User> getUserByRoles(Role role) {
        return userRepository.findByRole(role);
    }
-=======
->>>>>>> jatin
 }

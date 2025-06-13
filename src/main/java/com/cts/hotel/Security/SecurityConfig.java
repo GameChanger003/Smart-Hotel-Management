@@ -28,11 +28,7 @@ public class SecurityConfig {
         http.csrf(cs -> cs.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/login", "/auth/register","/auth/test").permitAll()
-<<<<<<< HEAD
-                .requestMatchers("/admin/**").hasRole("ADMIN") 
-=======
                 .requestMatchers("/admin/**","/admin/rooms/**","/hotels/**").hasRole("ADMIN") 
->>>>>>> jatin
                 .requestMatchers("/user/**").hasRole("GUEST")
                 .requestMatchers("/receptionist/**").hasRole("RECEPTIONIST")
                 .anyRequest().authenticated()
