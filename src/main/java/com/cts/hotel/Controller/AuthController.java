@@ -20,63 +20,47 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
 public class AuthController {
-    @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-    
-    @GetMapping("/test")
-    public String getMethodName() {
-        return "Hello Chinnu";
-    }
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> loginUser(@RequestBody User user) {
-//    	System.out.println(user);
-//        Optional<User> dbUser = userService.findByUsername(user.getId());
-//        if (dbUser.isPresent() && passwordEncoder.matches(user.getPassword(), dbUser.get().getPassword())) { 
-//            String token = jwtUtil.generateToken(dbUser.get().getId(), dbUser.get().getRole().toString());
-//            return ResponseEntity.ok(Collections.singletonMap("token", token));
-//        }
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-//    }
+	@Autowired
+	private JwtUtil jwtUtil;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
-        Optional<User> dbUser = userService.findByEmail(user.getEmail()); // ✅ Authenticate via email
-        if (dbUser.isPresent() && passwordEncoder.matches(user.getPassword(), dbUser.get().getPassword())) { 
-            String token = jwtUtil.generateToken(
-                dbUser.get().getEmail(), 
-                dbUser.get().getId(), 
-                dbUser.get().getRole().toString()
-            );
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
-        }
-        return ResponseEntity.status(401).body("Invalid credentials");
-    }
+	@GetMapping("/test")
+	public ResponseEntity<String> getMethodName() {
+		return ResponseEntity.status(200).body("Hello Chinnu");
+	}
 
+	@PostMapping("/login")
+	public ResponseEntity<?> loginUser(@RequestBody User user) {
+		Optional<User> dbUser = userService.findByEmail(user.getEmail()); // ✅ Authenticate via email
+		if (dbUser.isPresent() && passwordEncoder.matches(user.getPassword(), dbUser.get().getPassword())) {
+			String token = jwtUtil.generateToken(dbUser.get().getEmail(), dbUser.get().getId(),
+					dbUser.get().getRole().toString());
+			return ResponseEntity.ok(Collections.singletonMap("token", token));
+		}
+		return ResponseEntity.status(401).body("Invalid credentials");
+	}
 
+	@PostMapping("/register")
+	public ResponseEntity<?> registerUser(@RequestBody User user) {
+		System.out.println(user);
+		if(userService.findByEmail(user.getEmail()).isPresent()) {			
+			return ResponseEntity.status(409).body("Email already Exists");
+		}
+			userService.registerUser(user);
+			return ResponseEntity.ok(Collections.singletonMap("message", "User registered successfully"));
+	}
 
-    
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-    	System.out.println(user);
-        userService.registerUser(user);
-        return ResponseEntity.ok(Collections.singletonMap("message", "User registered successfully"));
-    }
-    
 //    @PostMapping("/register")
 //    public void registerUser(@RequestBody User user) {
 //    	System.out.println(user);
 //    }
 }
-

@@ -9,13 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.cts.hotel.Model.Role;
 import com.cts.hotel.Model.User;
 
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> { // ✅ Use Long for ID
-    Optional<User> findByEmail(String email); // ✅ Allows user lookup via email
-    Optional<User> findById(Long id); // ✅ Find by ID
-    List<User> findByRole(Role role);
+public interface UserRepository extends JpaRepository<User, Integer> { 
+	Optional<User> findByEmail(String email); 
 
+	Optional<User> findById(Long id); 
+
+	List<User> findByRole(Role role);
 }
-
-
