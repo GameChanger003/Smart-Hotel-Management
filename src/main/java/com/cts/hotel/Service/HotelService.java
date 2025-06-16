@@ -9,6 +9,8 @@ import com.cts.hotel.DAO.HotelDAO;
 import com.cts.hotel.Model.Hotel;
 import com.cts.hotel.Repo.HotelRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class HotelService implements HotelDAO {
 
@@ -23,6 +25,7 @@ public class HotelService implements HotelDAO {
 		return hotelRepository.findById(id).orElse(null);
 	}
 
+	@Transactional
 	public Hotel addHotel(Hotel hotel) {
 		return hotelRepository.save(hotel);
 	}

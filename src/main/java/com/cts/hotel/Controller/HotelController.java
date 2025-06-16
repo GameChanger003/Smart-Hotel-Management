@@ -3,6 +3,8 @@ package com.cts.hotel.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,8 @@ import com.cts.hotel.Model.Hotel;
 import com.cts.hotel.Service.HotelService;
 
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping("/Manager/hotels")
+@CrossOrigin(origins = "*")
 public class HotelController {
 
 	@Autowired
@@ -36,9 +39,9 @@ public class HotelController {
 	public Hotel addHotel(@RequestBody Hotel hotel) {
 		return hotelService.addHotel(hotel);
 	}
-	
+
 	@PutMapping("/update/{oldHotelID}")
-	public Hotel updateHotel(@PathVariable int oldHotelID,@RequestBody Hotel newHotel) {
+	public Hotel updateHotel(@PathVariable int oldHotelID, @RequestBody Hotel newHotel) {
 		return hotelService.updateHotel(oldHotelID, newHotel);
 	}
 

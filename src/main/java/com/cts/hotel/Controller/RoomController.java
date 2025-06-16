@@ -3,6 +3,7 @@ package com.cts.hotel.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,8 @@ import com.cts.hotel.Model.Room;
 import com.cts.hotel.Service.RoomService;
 
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("/Manager/rooms")
+@CrossOrigin(origins = "*")
 public class RoomController {
 
 	@Autowired

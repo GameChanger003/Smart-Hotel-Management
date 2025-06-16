@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/receptionist")
-@PreAuthorize("hasAuthority('RECEPTIONIST')")
+@RequestMapping("/Manager")
 public class ReceptionistController {
     @GetMapping("/dashboard")
     public String getReceptionistDashboard() {

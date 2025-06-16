@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/login", "/auth/register","/auth/test").permitAll()
                 .requestMatchers("/admin/rooms/**","/hotels/**","/admin/users").hasRole("ADMIN") 
                 .requestMatchers("/user/**","/booking/**","/paymnet/**","/Reviews/**").hasRole("GUEST")
-                .requestMatchers("/receptionist/**").hasRole("RECEPTIONIST")
+                .requestMatchers("/Manager/rooms/**","/Manager/hotels/**").hasRole("MANAGER")
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> 
