@@ -10,10 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 //• Booking (BookingID, UserID, RoomID, CheckInDate, CheckOutDate, Status, PaymentID)
 
 @Entity
+@Table(name = "booking")
 public class Booking {
 
 	@Id
@@ -21,6 +23,8 @@ public class Booking {
 	private int BookingID;
 	@Column
 	private int UserID;
+	@Column(name="room_id")
+	private int RoomID;
 	@Column
 	private Date CheckInDate;
 	@Column
@@ -28,20 +32,6 @@ public class Booking {
 	@Column
 	@Enumerated(EnumType.STRING)
 	private BookingStatus Status;
-
-	@Column
-	private int PaymentID;
-
-	public Booking(int bookingID, int userID, Date checkInDate, Date checkOutDate, BookingStatus status,
-			int paymentID) {
-		super();
-		BookingID = bookingID;
-		UserID = userID;
-		CheckInDate = checkInDate;
-		CheckOutDate = checkOutDate;
-		Status = status;
-		PaymentID = paymentID;
-	}
 
 	public int getBookingID() {
 		return BookingID;
@@ -57,6 +47,14 @@ public class Booking {
 
 	public void setUserID(int userID) {
 		UserID = userID;
+	}
+
+	public int getRoomID() {
+		return RoomID;
+	}
+
+	public void setRoomID(int roomID) {
+		RoomID = roomID;
 	}
 
 	public Date getCheckInDate() {
@@ -83,16 +81,25 @@ public class Booking {
 		Status = status;
 	}
 
-	public int getPaymentID() {
-		return PaymentID;
-	}
-
-	public void setPaymentID(int paymentID) {
-		PaymentID = paymentID;
+	public Booking(int bookingID, int userID, int roomID, Date checkInDate, Date checkOutDate, BookingStatus status) {
+		super();
+		BookingID = bookingID;
+		UserID = userID;
+		RoomID = roomID;
+		CheckInDate = checkInDate;
+		CheckOutDate = checkOutDate;
+		Status = status;
 	}
 
 	public Booking() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public String toString() {
+		return "Booking [BookingID=" + BookingID + ", UserID=" + UserID + ", RoomID=" + RoomID + ", CheckInDate="
+				+ CheckInDate + ", CheckOutDate=" + CheckOutDate + ", Status=" + Status + "]";
 	}
 
 }

@@ -2,8 +2,10 @@ package com.cts.hotel.Controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,12 +32,15 @@ public class BookingController {
 	}
 	
 	@PostMapping("/book")
-	public ResponseEntity<?> postBooking(@RequestBody Booking booking) {
-		//TODO: process POST request
-		bookingService.addBookings(booking);
-		return ResponseEntity.ok(Collections.singletonMap("message", " Booked successfully"));
-	}
-	
+    public ResponseEntity<String> bookRoom(@RequestBody Booking newBooking) {
+        String result = bookingService.bookRoom(newBooking);
+        
+        if (result.contains("already booked")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(result);
+        }
+        
+        return ResponseEntity.ok(result);
+    }
 	
 	
 }
