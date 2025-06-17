@@ -33,11 +33,6 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
-	@GetMapping("/test")
-	public ResponseEntity<String> getMethodName() {
-		return ResponseEntity.status(200).body("Hello Chinnu");
-	}
-
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@RequestBody User user) {
 		Optional<User> dbUser = userService.findByEmail(user.getEmail()); // ✅ Authenticate via email
@@ -59,8 +54,4 @@ public class AuthController {
 			return ResponseEntity.ok(Collections.singletonMap("message", "User registered successfully"));
 	}
 
-//    @PostMapping("/register")
-//    public void registerUser(@RequestBody User user) {
-//    	System.out.println(user);
-//    }
 }

@@ -51,6 +51,7 @@ public class AdminController {
 
 	@DeleteMapping("/users/")
 	public ResponseEntity<String> deleteUser(@RequestBody Map<String, Integer> request) {
+		//send the id through body		
 		Integer id = request.get("id");
 		if (id == null) {
 			return ResponseEntity.badRequest().body("User ID is required!");
