@@ -39,10 +39,6 @@ public class PaymentController {
 	    return paymentService.savePayment(payment);
 	}
 
-//	@PostMapping
-//	public ResponseEntity<String> savePayment(@RequestBody Payment payment) {
-//		return paymentService.savePayment(payment);
-//	}
 
 	@GetMapping("/fetchPaymentById")
 	public Payment fetchPaymentById(@RequestParam int paymentId) {

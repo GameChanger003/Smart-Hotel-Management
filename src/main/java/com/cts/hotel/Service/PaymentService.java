@@ -24,12 +24,7 @@ public class PaymentService {
 	@Autowired
 	private PaymentDao paymentDao;
 
-//	public Payment savePayment(Payment payment) {
-//
-//		return paymentDao.savePayment(payment);
-//
-//	}
-//	
+	
 	@Autowired
 	private PaymentRepository paymentRepository;
 

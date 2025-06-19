@@ -7,4 +7,6 @@ import com.cts.hotel.Model.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
+	
+    Room findByroomID(int roomId);
 }

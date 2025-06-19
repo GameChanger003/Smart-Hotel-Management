@@ -17,7 +17,7 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    
+    @Autowired
     private PaymentService paymentService;
     
     @GetMapping

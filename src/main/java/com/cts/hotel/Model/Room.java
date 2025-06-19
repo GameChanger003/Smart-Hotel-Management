@@ -88,4 +88,9 @@ public class Room {
 		this.features = features;
 	}
 
+	public Room() {
+		super();
+	}
+	
+
 }
