@@ -43,13 +43,13 @@ public class ReviewService {
 //	}
 	
 	public List<Booking> FindBookingsPast (int id) {
-	    List<Booking> booking = bookingRepository.findPreviousBookingsByUserId(id);
+	    List<Booking> booking = bookingRepository.findPreviousBookingsByUserID(id);
 		return booking;
 		
 	}
 	
 	public ResponseEntity<?> saveReview(Review review) {
-	    List<Booking> booking = bookingRepository.findPreviousBookingsByUserId(review.getUser());
+	    List<Booking> booking = bookingRepository.findPreviousBookingsByUserID(review.getUser());
 	    System.out.println(booking);
 	    if (booking.isEmpty()) {
 	    	return ResponseEntity.status(404).body("No data");

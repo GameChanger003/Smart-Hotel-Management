@@ -19,8 +19,8 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int BookingID;
-	@Column(name = "UserID")
-	private int userId;
+	@Column
+	private int UserID;
 	@Column
 	private int RoomId;
 	@Column(nullable = false)
@@ -42,11 +42,11 @@ public class Booking {
 	}
 
 	public int getUserID() {
-		return userId;
+		return UserID;
 	}
 
 	public void setUserID(int userID) {
-		userId = userID;
+		UserID = userID;
 	}
 
 	public int getRoomId() {
@@ -93,7 +93,7 @@ public class Booking {
 			int paymentID) {
 		super();
 		BookingID = bookingID;
-		userId = userID;
+		UserID = userID;
 		RoomId = roomId;
 		CheckInDate = checkInDate;
 		CheckOutDate = checkOutDate;
@@ -109,7 +109,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [BookingID=" + BookingID + ", UserID=" + userId + ", RoomId=" + RoomId + ", CheckInDate="
+		return "Booking [BookingID=" + BookingID + ", UserID=" + UserID + ", RoomId=" + RoomId + ", CheckInDate="
 				+ CheckInDate + ", CheckOutDate=" + CheckOutDate + ", Status=" + Status + ", PaymentID=" + PaymentID
 				+ "]";
 	}

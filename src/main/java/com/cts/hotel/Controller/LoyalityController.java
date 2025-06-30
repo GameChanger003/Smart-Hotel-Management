@@ -21,26 +21,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/user/loyality")
 @CrossOrigin(origins = "*")
 public class LoyalityController {
-	
+
 	@Autowired
 	private LoyaltyAccountService accountService;
-	
+
 	@GetMapping
 	public ResponseEntity<List<Loyality>> getAllLoaylityPoints() {
 		return ResponseEntity.ok(accountService.fetchAllLoyalty());
 	}
-	
+
 	@PostMapping("/add")
 	public ResponseEntity<Loyality> postMethodName(@RequestBody Loyality loyality) {
-		
+
 		return ResponseEntity.ok(accountService.saveLoyalty(loyality));
 	}
-	
+
 	@DeleteMapping("/delete/")
 	public String getMethodName(@RequestParam String param) {
 		return new String();
 	}
-	
-	
-	
+
+
+
 }

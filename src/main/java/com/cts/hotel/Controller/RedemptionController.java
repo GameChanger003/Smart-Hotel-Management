@@ -24,8 +24,8 @@ public class RedemptionController {
 	private RedemptionService redemptionService;
 
 	@GetMapping
-	public ResponseEntity<String> getAllPoints() {
-		return ResponseEntity.ok("hello");
+	public ResponseEntity<?> getAllPoints() {
+		return ResponseEntity.ok(redemptionService.getRedemption());
 	}
 	
 	@PostMapping("/add")

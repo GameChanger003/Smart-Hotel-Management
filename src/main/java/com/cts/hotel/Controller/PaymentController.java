@@ -35,8 +35,9 @@ public class PaymentController {
 	}
 
 	@PostMapping("/savePayment")
-	public ResponseEntity<String> savePayment(@RequestBody Payment payment) {
+	public ResponseEntity<?> savePayment(@RequestBody Payment payment) {
 	    return paymentService.savePayment(payment);
+//		return ResponseEntity.ok(payment);
 	}
 
 
@@ -59,8 +60,7 @@ public class PaymentController {
 
 	}
 
-	@CrossOrigin(origins = "*")
-	@GetMapping("/fetchAllPayment")
+	@GetMapping
 	public List<Payment> fetchAllPayment() {
 		return paymentService.fetchAllPayment();
 	}

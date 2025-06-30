@@ -17,8 +17,8 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @Autowired
-    private PaymentService paymentService;
+//    @Autowired
+//    private PaymentService paymentService;
     
     @GetMapping
     public ResponseEntity<List<Booking>> getAllBookings() {
@@ -27,26 +27,19 @@ public class BookingController {
 
     @GetMapping("/{bookingId}")
     public ResponseEntity<Booking> getBookingById(@PathVariable int bookingId) {
-        return bookingService.getById(bookingId); // no need to wrap again!
+        return bookingService.getById(bookingId); 
     }
 
 
 
     @PostMapping("/book")
-    public ResponseEntity<?> bookRoom(@RequestBody Booking booking,Payment payment) {
-        try {
-            Booking confirmed = bookingService.bookRoomIfAvailable(booking);            
-            return ResponseEntity.ok(confirmed);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Collections.singletonMap("error", e.getMessage()));
+    public ResponseEntity<?> bookRoom(@RequestBody Booking booking) {
+            return  bookingService.bookRoomIfAvailable(booking);               
         }
-    }
 
     @PutMapping("/cancel/{bookingId}")
-    public ResponseEntity<Booking> cancelBooking(@PathVariable int bookingId) {
-        return ResponseEntity.ok(bookingService.cancelBooking(bookingId));
+    public ResponseEntity<?> cancelBooking(@PathVariable int bookingId) {
+        return bookingService.cancelBooking(bookingId);
     }
     
     @PutMapping("/updateBooking")

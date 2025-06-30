@@ -30,11 +30,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/login", "/auth/register","/auth/test").permitAll()
                 .requestMatchers("/admin/rooms/**","/hotels/**","/admin/users").hasRole("ADMIN") 
-<<<<<<< HEAD
-                .requestMatchers("/users/booking/**","/booking/**","/paymnet/**","/Reviews/**","/user/loyalty/**").hasRole("GUEST")
-=======
                 .requestMatchers("/users/booking/**","/booking/**","/paymnet/**","/Reviews/**","/user/loyalty/**","/user/redemption/**").hasRole("GUEST")
->>>>>>> fb0a3d7 (added loyality & Redemption)
                 .requestMatchers("/Manager/rooms/**","/Manager/hotels/**").hasRole("MANAGER")
                 .anyRequest().authenticated()
             )

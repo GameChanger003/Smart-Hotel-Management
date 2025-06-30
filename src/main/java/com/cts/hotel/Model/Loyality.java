@@ -12,33 +12,33 @@ import jakarta.persistence.Table;
 //• LoyaltyAccount (LoyaltyID, UserID, PointsBalance, LastUpdated)
 
 @Entity
-@Table
+@Table(name = "Loy")
 public class Loyality {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int LoyaltyID;
+	private int loyaltyID;
 	@Column
-	private int UserID;
+	private int userID;
 	@Column
 	private int PointsBalance;
 	@Column
 	private Date LastUpdated;
 
 	public int getLoyaltyID() {
-		return LoyaltyID;
+		return loyaltyID;
 	}
 
-	public void setLoyaltyID(int loyaltyID) {
-		LoyaltyID = loyaltyID;
+	public void setLoyaltyID(int id) {
+		loyaltyID = id;
 	}
 
 	public int getUserID() {
-		return UserID;
+		return userID;
 	}
 
-	public void setUserID(int userID) {
-		UserID = userID;
+	public void setUserID(int id) {
+		userID = id;
 	}
 
 	public int getPointsBalance() {
@@ -59,14 +59,14 @@ public class Loyality {
 
 	@Override
 	public String toString() {
-		return "Loyality [LoyaltyID=" + LoyaltyID + ", UserID=" + UserID + ", PointsBalance=" + PointsBalance
+		return "Loyality [LoyaltyID=" + loyaltyID + ", UserID=" + userID + ", PointsBalance=" + PointsBalance
 				+ ", LastUpdated=" + LastUpdated + "]";
 	}
 
-	public Loyality(int loyaltyID, int userID, int pointsBalance, Date lastUpdated) {
+	public Loyality(int loyID, int userId, int pointsBalance, Date lastUpdated) {
 		super();
-		LoyaltyID = loyaltyID;
-		UserID = userID;
+		loyaltyID = loyID;
+		userID = userId;
 		PointsBalance = pointsBalance;
 		LastUpdated = lastUpdated;
 	}

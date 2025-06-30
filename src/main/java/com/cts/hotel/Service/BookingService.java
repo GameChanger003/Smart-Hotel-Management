@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.cts.hotel.Model.*;
@@ -34,14 +35,18 @@ public class BookingService {
         if (optionalBooking.isPresent()) {
             return ResponseEntity.ok(optionalBooking.get());
         } else {
-            return ResponseEntity.status(404).body(null);
+            return ResponseEntity.status(422).body(null);
         }
     }
 
 
-    public Booking bookRoomIfAvailable(Booking booking) {
-        if (booking.getCheckInDate() == null || booking.getCheckOutDate() == null) {
-            throw new IllegalArgumentException("Check-in and check-out dates must not be null.");
+    public ResponseEntity<?> bookRoomIfAvailable(Booking booking) {
+        if (booking.getCheckInDate() == null || booking.getCheckOutDate() == null ) {
+        	return ResponseEntity.status(400).body("Check-in and check-out dates must not be null");
+        }
+        
+        if (booking.getCheckInDate().after(booking.getCheckOutDate()) && booking.getCheckOutDate().before(booking.getCheckInDate())) {
+        	return ResponseEntity.status(400).body("Check-in and check-out dates must be given correctly");
         }
 
         List<Booking> conflicts = bookingRepository.findConflictingBookings(
@@ -51,20 +56,20 @@ public class BookingService {
         );
 
         if (!conflicts.isEmpty()) {
-            throw new IllegalStateException(" Room is already booked for the selected dates.");
+        	return ResponseEntity.status(409).body("Room is already booked for the selected dates.");
         }
 
         booking.setStatus(BookingStatus.BOOKED);
-        return bookingRepository.save(booking);
+        return ResponseEntity.ok(bookingRepository.save(booking));
     }
 
 
-    public Booking cancelBooking(int bookingId) {
+    public ResponseEntity<?> cancelBooking(int bookingId) {
         Booking booking = getById(bookingId).getBody();
 
-        if (booking.getCheckOutDate() == null) {
-            throw new IllegalArgumentException("Check-out date is missing.");
-        }
+//        if (booking.getCheckOutDate() == null) {
+//        	return ResponseEntity.status(409).body("Room is already booked for the selected dates.");
+//        }
 
         LocalDate now = LocalDate.now();
         LocalDate checkOut = booking.getCheckOutDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -72,11 +77,12 @@ public class BookingService {
         long hoursUntilCheckout = ChronoUnit.HOURS.between(now.atStartOfDay(), checkOut.atStartOfDay());
 
         if (hoursUntilCheckout < 24) {
-            throw new RuntimeException("Cannot cancel within 24 hours of check-out.");
+        	return ResponseEntity.status(409).body("Cannot cancel within 24 hours of check-out.");
+
         }
 
         booking.setStatus(BookingStatus.CANCELLED);
-        return bookingRepository.save(booking);
+        return ResponseEntity.ok(bookingRepository.save(booking));
     }
     
     public Booking updateBooking(int oldBookingId, Booking newBooking) {

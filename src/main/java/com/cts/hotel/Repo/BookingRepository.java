@@ -15,15 +15,11 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 	Optional<Booking> findById(Integer id);
 
 	@Query("SELECT b FROM Booking b WHERE b.RoomId = :roomId AND b.Status = 'BOOKED' AND "
-			+ "(:checkInDate <= b.CheckOutDate AND :checkOutDate >= b.CheckInDate)")
-	List<Booking> findConflictingBookings(@Param("roomId") int roomId, @Param("checkInDate") Date checkIn,
-			@Param("checkOutDate") Date checkOut);
+		     + "(:checkInDate <= b.CheckOutDate AND :checkOutDate >= b.CheckInDate)")
+		List<Booking> findConflictingBookings(@Param("roomId") int roomId,
+		                                      @Param("checkInDate") Date checkIn,
+		                                      @Param("checkOutDate") Date checkOut);
 
-
-	
-	@Query("SELECT b FROM Booking b WHERE b.CheckOutDate < CURRENT_DATE AND b.userId = :userId")
-	List<Booking> findPreviousBookingsByUserId(@Param("userId") int userId);
-
-	
-
+		@Query("SELECT b FROM Booking b WHERE b.CheckOutDate < CURRENT_DATE AND b.UserID = :userId")
+		List<Booking> findPreviousBookingsByUserID(@Param("userId") int userId);
 }
